@@ -11867,14 +11867,14 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Minimum price of the data</span>
-<span class="n">minimum_price</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Maximum price of the data</span>
-<span class="n">maximum_price</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Mean price of the data</span>
 <span class="n">mean_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
@@ -11943,9 +11943,9 @@ Standard deviation of prices: $165,171.13
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <ol>
-<li>An increase in 'RM' will lead to an increase in the value of 'MEDV'</li>
-<li>An decrease in 'LSTAT' will lead to an increase in the value of 'MEDV'</li>
-<li>An decrease in 'PTRATIO' will lead to an increase in the value of 'MEDV'</li>
+<li>An increase in 'RM' will lead to an increase in the value of 'MEDV'. Usually, if the number of rooms in a house is larger, then the sqft might also be larger. Thus, the price of the house is higher.</li>
+<li>An decrease in 'LSTAT' will lead to an increase in the value of 'MEDV'. 'low class' mean those families have low income, they can only buy cheaper house. If the percentage of homeowners in the neighorhood considered "low class" is high, the houses in that neighborhood are considered chaeper. Thus, the price of the house will be lower when this percentage is high.</li>
+<li>An decrease in 'PTRATIO' will lead to an increase in the value of 'MEDV'. In primar and secondary schools, the tuition and fee are always higher if the ratio of students to teachers is low. If the ratio is high, the neighborhood can be considered as a "low class" neighborhood. the price of house at that neighborhood will be lower. </li>
 </ol>
 
 </div>
@@ -12078,7 +12078,7 @@ Standard deviation of prices: $165,171.13
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong>
-The coefficient of determination is 0.923, which is considered successfully captured the variation of the target variable.</p>
+The coefficient of determination is 0.923, which is considered successfully captured the variation of the target variable. The R^2 is range from 0 to 1. 0 indicates that the model explains none of the variability of the response data around its mean, while 1 indicates that the model explains all the variability of the response data around its mean. A R^2 of 0.923 can be considered as a high score, which means the model successfully captured the variation of the target variable.</p>
 
 </div>
 </div>
@@ -14585,7 +14585,7 @@ j6VYi4iIiOhjKdYiIiIi+liKtYiIiIg+lmItIiIioo/9H2fnwyAMvLF5AAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-When the model is trained with a maximum depth of 1, the model suffers from high bias. When the model is trained with a maximum depth of 10, the model suffers from high variance. THe difference between training score and validation score in the graph justifies my conclusion.</p>
+When the model is trained with a maximum depth of 1, the model suffers from high bias, because both the training score and validation score are high. When the model is trained with a maximum depth of 10, the model suffers from high variance. The difference between training score and validation score indicates the variance. When the difference is larger, the variance of the model is higher.</p>
 
 </div>
 </div>
@@ -14636,7 +14636,8 @@ When the model is trained with a maximum depth of 1, the model suffers from high
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Grid Search is a way of systematically working through multiple combinations of parameter tunes, cross-validating as it goes to determine which tune gives the best performance.</p>
+<p><strong>Answer: </strong> Grid Search is a way of systematically working through multiple combinations of parameter tunes, cross-validating as it goes to determine which tune gives the best performance. 
+grid search is simply an exhaustive searching through a manually specified subset of the hyperparameter space of a learning algorithm.</p>
 
 </div>
 </div>
@@ -14657,10 +14658,8 @@ When the model is trained with a maximum depth of 1, the model suffers from high
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Cross-validation is a technique to evaluate predictive models by partitioning the original sample into a training set to train the model, and a test set to evaluate it. In k-fold cross-validation, the original sample is randomly partitioned into k equal size subsamples.</p>
-<p>With the benefits of k-fold cross-validation, we're able to use the average testing accuracy as a benchmark to decide which is the most optimal set of parameters for the learning algorithm.</p>
-<p>If we do not use a cross-validation set and we run grid-search, we would have different sets of optimal parameters due to the fact that without a cross-validation set, the estimate of out-of-sample performance would have a high variance.
-In summary, without k-fold cross-validation the risk is higher that grid search will select hyper-parameter value combinations that perform very well on a specific train-test split but poorly otherwise.</p>
+<p><strong>Answer: </strong> Cross-validation is a technique to evaluate predictive models by partitioning the original sample into a training set to train the model, and a test set to evaluate it. In k-fold cross-validation, the original sample is randomly partitioned into k equal size subsamples. We run k seperate learning experiments. Of the k subsamples, a single subsample is retained as the validation data for testing the model, and the remaining k-1 subsamples are used as training data. The cross-validation process is then repeated k times (the folds), with each of the k subsamples used exactly once as the validation data.</p>
+<p>If we do not use a cross-validation set and we run grid-search, we would have different sets of optimal parameters due to the fact that without a cross-validation set, the estimate of out-of-sample performance would have a high variance.</p>
 
 </div>
 </div>
@@ -14843,7 +14842,7 @@ The optimal model has maximum depth of 4. The result is as the same as my guess 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Produce a matrix for client data</span>
@@ -14854,6 +14853,9 @@ The optimal model has maximum depth of 4. The result is as the same as my guess 
 <span class="c1"># Show predictions</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">price</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">client_data</span><span class="p">)):</span>
     <span class="k">print</span> <span class="s2">&quot;Predicted selling price for Client {}&#39;s home: ${:,.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">price</span><span class="p">)</span>
+    
+    
+<span class="n">features</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -14873,6 +14875,75 @@ Predicted selling price for Client 3&#39;s home: $887,100.00
 </div>
 </div>
 
+<div class="output_area"><div class="prompt output_prompt">Out[38]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>RM</th>
+      <th>LSTAT</th>
+      <th>PTRATIO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>489.000000</td>
+      <td>489.000000</td>
+      <td>489.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>6.240288</td>
+      <td>12.939632</td>
+      <td>18.516564</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.643650</td>
+      <td>7.081990</td>
+      <td>2.111268</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>3.561000</td>
+      <td>1.980000</td>
+      <td>12.600000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>5.880000</td>
+      <td>7.370000</td>
+      <td>17.400000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>6.185000</td>
+      <td>11.690000</td>
+      <td>19.100000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>6.575000</td>
+      <td>17.120000</td>
+      <td>20.200000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>8.398000</td>
+      <td>37.970000</td>
+      <td>22.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -14883,6 +14954,15 @@ Predicted selling price for Client 3&#39;s home: $887,100.00
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
+<ol>
+<li><p>the first client has 5 rooms, 17% "low class" homeowner in the neighborhood and the ratio of students to teachers is 15. The value of "LSTAT" and "PTRATION" is on average. The number of rooms is below average. Thus, the price of the home is close to and slightly lower than the average of all house prices.</p>
+</li>
+<li><p>the second client has 4 rooms, 32% "low class" homeowner in the neighborhood and the ratio of students to teachers is 22. The values of "LSTAT" and "PTRATION" are pretty high. Both features are maximum values among all houses. The number of rooms is very low, which is the minimum value of "RM" feature. Thus, the price of the home is very low among all houses.</p>
+</li>
+<li><p>the second client has 8 rooms, 3% "low class" homeowner in the neighborhood and the ratio of students to teachers is 12. The values of "LSTAT" and "PTRATION" are pretty low. They are minimum values among all houses. The number of rooms is very high, which is the maximum value of "RM" feature. Thus, the price of the home is very high among all houses.</p>
+</li>
+</ol>
+<p>Descriptive Statistics of data:</p>
 <ul>
 <li>Minimum price: $105,000.00</li>
 <li>Maximum price: $1,024,800.00</li>
@@ -14971,6 +15051,7 @@ Range in prices: $73,357.39
 <li>We currently only use three features to predict the housing price. We can add more features, like crime rate, sqft of the house, etc, to get more accurate proce prediction.</li>
 <li>the data collected in Boston is not applicable in a rural city. </li>
 </ol>
+<p>Thus, the constructed model should not be used in a real-world setting.</p>
 
 </div>
 </div>
